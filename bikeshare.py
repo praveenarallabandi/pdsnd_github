@@ -19,7 +19,7 @@ def get_filters():
             city += ' city'
             break
         else:
-            print('\n\nYour answer does not match any of the above options, please try again!\n')
+            print('\n\nYour answer does not match any of the above options, please try again later!\n')
 
 
     months = ['january', 'february',

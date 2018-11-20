@@ -5,7 +5,7 @@ created 11/20/2018.
 PDSND_GITHUB
 
 ### Description
-Describe what your project is about and what it does
+Learning GITHUB
 
 ### Files used
 Include the files used
