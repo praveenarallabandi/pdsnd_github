@@ -163,7 +163,7 @@ def get_filters():
                 else:
                     print ('Your answer does not match any of the above options, please try again!\n')
             # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-    days = ['all', 'monday', 'tuesday','wednesday, thursday, friday','saturday', 'sunday']
+    days = ['all', 'monday', 'tuesday','wednesday', 'thursday', 'friday','saturday', 'sunday']
     while True:
                 day = input(str('\nWould you like to search by one of the following days?\nSunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or all of them?\n' ).lower())
                 if day in days:
