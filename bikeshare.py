@@ -37,44 +37,24 @@ class BikeShare:
         if self.city == 'chicago':
             self.df = pd.read_csv("./chicago.csv", sep=',', header=None, names=headers, dtype=dtypes, parse_dates=dateCols)
             self.df['start_time'] = pd.to_datetime(self.df['start_time'], errors='coerce')
-            self.df['trip_duration'] = pd.to_numeric(self.df['trip_duration'], errors='coerce')
-            self.df['birth_year'] = pd.to_numeric(self.df['birth_year'], errors='coerce')
+            self.df['trip_duration'] = pd.to_numeric(self.df['trip_duration'], errors='coerce').fillna(0).astype(np.int64)
+            self.df['birth_year'] = pd.to_numeric(self.df['birth_year'], errors='coerce').fillna(0).astype(np.int64)
             print(self.df.head(5))
 
         if self.city == 'washington':
             self.df = pd.read_csv("./washington.csv", sep=',', header=None, names=headers, dtype=dtypes, parse_dates=dateCols)
             self.df['start_time'] = pd.to_datetime(self.df['start_time'], errors='coerce')
-            self.df['trip_duration'] = pd.to_numeric(self.df['trip_duration'], errors='coerce')
-            self.df['birth_year'] = pd.to_numeric(self.df['birth_year'], errors='coerce')
+            self.df['trip_duration'] = pd.to_numeric(self.df['trip_duration'], errors='coerce').fillna(0).astype(np.int64)
+            # self.df['birth_year'] = self.df['birth_year'].fillna(0, inplace=True)
+            self.df = self.df.fillna(0)
             print(self.df.head(5))
 
         if self.city == 'new york':
             self.df = pd.read_csv("./new_york_city.csv", sep=',', header=None, names=headers, dtype=dtypes, parse_dates=dateCols)
             self.df['start_time'] = pd.to_datetime(self.df['start_time'], errors='coerce')
-            self.df['trip_duration'] = pd.to_numeric(self.df['trip_duration'], errors='coerce')
-            self.df['birth_year'] = pd.to_numeric(self.df['birth_year'], errors='coerce')
+            self.df['trip_duration'] = pd.to_numeric(self.df['trip_duration'], errors='coerce').fillna(0).astype(np.int64)
+            self.df['birth_year'] = pd.to_numeric(self.df['birth_year'], errors='coerce').fillna(0).astype(np.int64)
             print(self.df.head(5))
-        # return df // TODO 
-
-    def time_stats(self, df):
-        """Displays statistics on the most frequent times of travel."""
-
-        print('\nCalculating The Most Frequent Times of Travel...\n')
-        start_time = time.time()
-
-        # TO DO: display the most common month
-        if time == 'month':
-            months = ['january', 'february', 'march', 'april', 'may', 'june']
-            month = months.index(month) + 1
-            df = df[df['month'] == month]
-
-        # TO DO: display the most common day of week
-        if time == 'day_of_week':
-            days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-            for d in days:
-                if day_of_week.capitalize() in d:
-                    day_of_week = d
-                df = df[df['day_of_week'] == day_of_week]
         
     # TO DO: display the most common start hour
     def popular_hour(self):
@@ -140,6 +120,26 @@ class BikeShare:
         print('The oldest users are born in {}.\nThe youngest users are born in {}.'
             '\nThe most popular birth year is {}.'.format(earliest, latest, mode))
 
+    def time_stats(self, df):
+        """Displays statistics on the most frequent times of travel."""
+
+        print('\nCalculating The Most Frequent Times of Travel...\n')
+        start_time = time.time()
+
+        # TO DO: display the most common month
+        if time == 'month':
+            months = ['january', 'february', 'march', 'april', 'may', 'june']
+            month = months.index(month) + 1
+            df = df[df['month'] == month]
+
+        # TO DO: display the most common day of week
+        if time == 'day_of_week':
+            days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+            for d in days:
+                if day_of_week.capitalize() in d:
+                    day_of_week = d
+                df = df[df['day_of_week'] == day_of_week]
+                
 # Starting execution here
 def get_filters():
     print('Hello! Let\'s explore some US bikeshare data!') 
