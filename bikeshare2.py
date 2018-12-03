@@ -37,14 +37,22 @@ class BikeShare:
         if self.city == 'chicago':
             self.df = pd.read_csv("./chicago.csv", sep=',', header=None, names=headers, dtype=dtypes, parse_dates=dateCols)
             self.df['start_time'] = pd.to_datetime(self.df['start_time'], errors='coerce')
+            self.df['trip_duration'] = pd.to_numeric(self.df['trip_duration'], errors='coerce')
+            self.df['birth_year'] = pd.to_numeric(self.df['birth_year'], errors='coerce')
             print(self.df.head(5))
 
         if self.city == 'washington':
-            self.df = pd.read_csv("./washington.csv")
+            self.df = pd.read_csv("./washington.csv", sep=',', header=None, names=headers, dtype=dtypes, parse_dates=dateCols)
+            self.df['start_time'] = pd.to_datetime(self.df['start_time'], errors='coerce')
+            self.df['trip_duration'] = pd.to_numeric(self.df['trip_duration'], errors='coerce')
+            self.df['birth_year'] = pd.to_numeric(self.df['birth_year'], errors='coerce')
             print(self.df.head(5))
 
         if self.city == 'new york':
-            self.df = pd.read_csv("./new_york_city.csv")
+            self.df = pd.read_csv("./new_york_city.csv", sep=',', header=None, names=headers, dtype=dtypes, parse_dates=dateCols)
+            self.df['start_time'] = pd.to_datetime(self.df['start_time'], errors='coerce')
+            self.df['trip_duration'] = pd.to_numeric(self.df['trip_duration'], errors='coerce')
+            self.df['birth_year'] = pd.to_numeric(self.df['birth_year'], errors='coerce')
             print(self.df.head(5))
         # return df // TODO 
 
@@ -97,21 +105,15 @@ class BikeShare:
 
     # TO DO: display total travel time
     def total_trvel_time(self):
-        print("That took %s seconds." % (time.time() - self.df['start_time']))
-        print("\nCalculating the next statistic...")
-        self.df['start_time'] = time.time()
+        total_travel_time = self.df['trip_duration'].sum()
+        print('The trip total time is {}'.format(total_travel_time))
         
     # TO DO: display mean travel time
-    def mean_trip_duration(self, df):
-        print("That took %s seconds." % (time.time() - start_time))
-        print("\nCalculating the next statistic...")
-        start_time = time.time()
+    def mean_trip_duration(self):
+        mean_travel_time = self.df['trip_duration'].mean()
+        print('The mean trip total time is {}'.format(mean_travel_time))
 
-        print("\nThis took %s seconds." % (time.time() - start_time))
-        print('-'*40)
-
-
-    def user_stats(self, df):
+    def user_stats(self):
         """Displays statistics on bikeshare users."""
 
         print('\nCalculating User Stats...\n')
@@ -175,10 +177,11 @@ def get_filters():
     bikeShare.popular_hour()
     bikeShare.popular_stations()
     bikeShare.popular_trip()
-    # bikeShare.total_trvel_time() // TODO
+    bikeShare.total_trvel_time()
+    bikeShare.mean_trip_duration()
     bikeShare.users()
     bikeShare.gender()
-    # bikeShare.birth_years() //TODO
+    bikeShare.birth_years()
 
 def main():
     get_filters()
